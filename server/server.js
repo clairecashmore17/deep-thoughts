@@ -2,7 +2,8 @@ const express = require("express");
 
 //import ApolloServer
 const { ApolloServer } = require("apollo-server-express");
-
+//importing our authentication middleware
+const { authMiddleware } = require("./utils/auth");
 //import our typedefs and resolvers
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
@@ -12,6 +13,9 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  // passing in contact set to return what you want available in the resolvers
+  // This will ensures every request performs an authentication check
+  context: authMiddleware,
 });
 
 const app = express();
