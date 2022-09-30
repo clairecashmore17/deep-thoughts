@@ -37,7 +37,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   }
   // Wildcard GET route for the server, if we make GET to location on server that doesnt have explicit route define, respond with production-ready rect front end code
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..client/nuild/index.html"));
+    res.sendFile(path.join(__dirname, "..client/build/index.html"));
   });
 
   db.once("open", () => {
