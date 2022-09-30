@@ -8,7 +8,7 @@ const Home = () => {
   const { loading, data } = useQuery(QUERY_THOUGHTS);
   // now we destructure the data using optional chaining.
   const thoughts = data?.thoughts || [];
-  console.log(thoughts);
+  // console.log(thoughts);
   return (
     <main>
       <div className="flex-row justify-space-between">
