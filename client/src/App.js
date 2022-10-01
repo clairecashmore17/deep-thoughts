@@ -12,6 +12,7 @@ import {
 } from "@apollo/client";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { setContext } from "@apollo/client/link/context";
 
 import Login from "./pages/Login";
 import NoMatch from "./pages/NoMatch";
@@ -25,9 +26,22 @@ const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
+//we can use this as middleare to retrieve token and combine with existing httpLink
+const authLink = setContext((_, { headers }) => {
+  //retrieve the token
+  const token = localStorage.getItem("id_token");
+  return {
+    //set the http request headers to include the found token
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
 // connect to our GraphQL API server
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
