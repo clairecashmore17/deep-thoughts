@@ -31,7 +31,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
   //Serve up static assets
   // is the node environment in production?
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV) {
     // tell express to serve any files in react applications build directory in the client folder
     app.use(express.static(path.join(__dirname, "..client/build")));
   }
