@@ -33,7 +33,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   // is the node environment in production?
   if (process.env.NODE_ENV === "production") {
     // tell express to serve any files in react applications build directory in the client folder
-    app.use(express.static(path.join(__dirname, "..client/build")));
+    app.use(express.static(path.join(__dirname, "../client/build")));
   }
   // Wildcard GET route for the server, if we make GET to location on server that doesnt have explicit route define, respond with production-ready rect front end code
   app.get("*", (req, res) => {
